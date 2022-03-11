@@ -14,7 +14,8 @@ public class Movement {
     [Fact]
     public void ClockwiseMovement() {
         // Arrange
-        var t = new Turtle();
+        var map = new Map();
+        var t = new Turtle(map);
         
         // Act
         t.MoveForward(10);
@@ -30,15 +31,16 @@ public class Movement {
         var expectedState = new TurtleState {
             Direction = Directions.West,
             X = -10,
-            Y = -10
+            Y = -10,
+            Map = map,
         };
         Assert.Equal(expectedState,state );
     }
     [Fact]
     public void AllDirectionTurn() {
         // Arrange
-        var t = new Turtle();
-        
+        var map = new Map();
+        var t = new Turtle(map);
         // Act
         t.MoveForward(15);
         t.Turn(TurnDirections.Left);
@@ -53,7 +55,8 @@ public class Movement {
         var expectedState = new TurtleState {
             Direction = Directions.South,
             X = 20,
-            Y = 10
+            Y = 10,
+            Map = map,
         };
         Assert.Equal(expectedState,state );
     }
