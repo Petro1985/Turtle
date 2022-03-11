@@ -15,6 +15,14 @@ public class Turtle {
         _log.Add(new MoveCommand(distance));
     }
 
+    public void TakeOff() {
+        _log.Add(new TakeOffCommand());
+    }
+
+    public void Land() {
+        _log.Add(new LandCommand());
+    }
+
     public TurtleState whatIsMyState() {
         return _log.Aggregate(_initialState, (state, command) => command.ApplyCommand(state));
     }

@@ -9,9 +9,7 @@ class TurnCommand : CommandBase {
     public TurnDirections TurnDirection { get; }
     
     public override TurtleState ApplyCommand(TurtleState ts) {
-        var newState = new TurtleState(ts);
-        newState.Direction = ts.Direction.turn(TurnDirection);
-        return newState;
+        return ts with {Direction = ts.Direction.turn(TurnDirection)};
         //throw new NotImplementedException();
     }
 

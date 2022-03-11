@@ -14,6 +14,11 @@ class MoveCommand : CommandBase {
         if (obj is not Wall) {
             return ts;
         }
+        
+        if (ts.SoulState == SoulState.Helicopter) {
+            return ts;
+        }
+        
         return MoveForward(ts, -1);
     }
 
@@ -27,36 +32,24 @@ class MoveCommand : CommandBase {
     //private static Dictionary<Type, Func<TurtleState, TurtleState>> CrushHandlers = new ();
 
     private static TurtleState MoveForward(TurtleState ts, int steps = 1) {
-        var newState = new TurtleState(ts);
-        switch (ts.Direction) {
-            case Directions.North:
-                newState.Y = newState.Y + steps;
-                break;
-            case Directions.East:
-                newState.X = newState.X + steps;
-                break;
-            case Directions.South:
-                newState.Y = newState.Y - steps;
-                break;
-            case Directions.West:
-                newState.X = newState.X - steps;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-
-        return newState;
+        ts = ts.Direction switch {
+            Directions.North => ts with { Y = ts.Y + steps },
+            Directions.East => ts with { X = ts.X + steps },
+            Directions.South => ts with { Y = ts.Y - steps },
+            Directions.West => ts with { X = ts.X - steps },
+            _ => throw new ArgumentOutOfRangeException()
+        };
+        return ts;
     }
     
     public override TurtleState ApplyCommand(TurtleState ts) {
-        var newState = new TurtleState(ts);
         for (int i = 1; i <= Distance; i++) {
-            newState = MoveForward(newState);
-            var whatIsThere = newState.Map.WhatIsThere(newState.X, newState.Y);
-            newState = CrushHandlers.Aggregate(newState, 
+            ts = MoveForward(ts);
+            var whatIsThere = ts.Map.WhatIsThere(ts.X, ts.Y);
+            ts = CrushHandlers.Aggregate(ts, 
                 (current, crushHandler) => crushHandler(current, whatIsThere)
             );
         }
-        return newState;
+        return ts;
     }
 }
