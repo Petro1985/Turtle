@@ -6,6 +6,11 @@ using Xunit;
 namespace Tests; 
 
 public class Movement {
+    //       __
+    //      |  |
+    //      O  |
+    //         |
+    //  O-------
     [Fact]
     public void SomeTest() {
         // Arrange
@@ -22,10 +27,11 @@ public class Movement {
         var state = t.whatIsMyState();
         
         // Assert
-        Assert.Equal(state, new TurtleState {
-            Direction = Directions.East,
-            x = 10,
-            y = -10
-        });
+        var expectedState = new TurtleState {
+            Direction = Directions.West,
+            X = -10,
+            Y = -10
+        };
+        Assert.Equal(expectedState,state );
     }
 }

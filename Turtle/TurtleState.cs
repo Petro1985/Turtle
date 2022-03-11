@@ -1,10 +1,17 @@
 ﻿namespace TheTurtle;
 
 public struct TurtleState {
-    public Directions Direction = Directions.North;
-    public int x = 0;
-    public int y = 0;
+    public Directions Direction;
+    public int X;
+    public int Y;
+
+    public TurtleState(Directions direction = Directions.North, int x = 0, int y = 0) {
+        Direction = direction;
+        this.X = x;
+        this.Y = y;
+    }
+
     public override string ToString() {
-        return $"x = {x}\ny = {y}\nDirection: {Enum.GetName(Direction)}";
+        return $"x = {X}\ny = {Y}\nDirection: {Enum.GetName(Direction)}";
     }
 }

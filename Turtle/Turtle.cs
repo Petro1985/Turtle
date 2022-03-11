@@ -15,23 +15,23 @@ public class Turtle {
         return _log.Aggregate(new TurtleState(), (state, command) => {
             var newState = new TurtleState {
                 Direction = state.Direction,
-                x = state.x,
-                y = state.y
+                X = state.X,
+                Y = state.Y
             };
              switch (command) {
                 case MoveCommand moveCommand:
                     switch (state.Direction) {
                         case Directions.East:
-                            newState.x = state.x + moveCommand.Distance;
+                            newState.X = state.X + moveCommand.Distance;
                             break;
                         case Directions.West:
-                            newState.x = state.x - moveCommand.Distance;
+                            newState.X = state.X - moveCommand.Distance;
                             break;
                         case Directions.North:
-                            newState.y = state.y + moveCommand.Distance;
+                            newState.Y = state.Y + moveCommand.Distance;
                             break;
                         case Directions.South:
-                            newState.y = state.y - moveCommand.Distance;
+                            newState.Y = state.Y - moveCommand.Distance;
                             break;
                     }
                     break;
