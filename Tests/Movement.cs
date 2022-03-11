@@ -12,7 +12,7 @@ public class Movement {
     //         |
     //  O-------
     [Fact]
-    public void SomeTest() {
+    public void ClockwiseMovement() {
         // Arrange
         var t = new Turtle();
         
@@ -31,6 +31,29 @@ public class Movement {
             Direction = Directions.West,
             X = -10,
             Y = -10
+        };
+        Assert.Equal(expectedState,state );
+    }
+    [Fact]
+    public void AllDirectionTurn() {
+        // Arrange
+        var t = new Turtle();
+        
+        // Act
+        t.MoveForward(15);
+        t.Turn(TurnDirections.Left);
+        t.MoveForward(10);
+        t.Turn(TurnDirections.Back);
+        t.MoveForward(30);
+        t.Turn(TurnDirections.Right);
+        t.MoveForward(5);
+        var state = t.whatIsMyState();
+        
+        // Assert
+        var expectedState = new TurtleState {
+            Direction = Directions.South,
+            X = 20,
+            Y = 10
         };
         Assert.Equal(expectedState,state );
     }
