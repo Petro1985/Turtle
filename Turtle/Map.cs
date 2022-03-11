@@ -21,15 +21,17 @@ public class Emptiness : MapObject {
 }
 
 public class Map {
-    private ICollection<MapObject> MapObjects = new List<MapObject>();
+    private Dictionary<(int, int), MapObject> MapObjects = new ();
+    //private ICollection<MapObject> MapObjects = new List<MapObject>();
 
     public MapObject WhatIsThere(int x, int y) {
-        return MapObjects.FirstOrDefault((o => o.X == x && o.Y == y))
-               ?? new Emptiness(x, y);
+        return MapObjects.TryGetValue((x, y), out var mapObject) 
+            ? mapObject 
+            : new Emptiness(x, y);
     }
 
-    public void Add(MapObject newObj) {
-        if (newObj is Emptiness) return;
-        MapObjects.Add(newObj);
+    public bool Add(MapObject newObj) {
+        if (newObj is Emptiness) return true;
+        return MapObjects.TryAdd((newObj.X, newObj.Y), newObj);
     }
 }
