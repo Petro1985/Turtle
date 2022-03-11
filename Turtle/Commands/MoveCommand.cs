@@ -5,18 +5,16 @@ namespace ConsoleApp3.Commands;
 
 class MoveCommand : CommandBase {
     static MoveCommand() {
-        CrushHandlers.Add(typeof(Wall), CrushIntoWall);
-        CrushHandlers.Add(typeof(Emptiness), CrushIntoEmptiness);
+        CrushHandlers = new List<Func<TurtleState, MapObject, TurtleState>> {
+            CrushIntoWallHandler
+        };
     }
 
-    private static TurtleState CrushIntoEmptiness(TurtleState ts) {
-        return ts;
-        //throw new NotImplementedException();
-    }
-
-    private static TurtleState CrushIntoWall(TurtleState ts) {
+    private static TurtleState CrushIntoWallHandler(TurtleState ts, MapObject obj) {
+        if (obj is not Wall) {
+            return ts;
+        }
         return MoveForward(ts, -1);
-        //throw new NotImplementedException();
     }
 
 
@@ -25,7 +23,8 @@ class MoveCommand : CommandBase {
     }
     public int Distance { get; }
 
-    private static Dictionary<Type, Func<TurtleState, TurtleState>> CrushHandlers = new ();
+    private static IEnumerable<Func<TurtleState, MapObject, TurtleState>> CrushHandlers;
+    //private static Dictionary<Type, Func<TurtleState, TurtleState>> CrushHandlers = new ();
 
     private static TurtleState MoveForward(TurtleState ts, int steps = 1) {
         var newState = new TurtleState(ts);
@@ -54,8 +53,9 @@ class MoveCommand : CommandBase {
         for (int i = 1; i <= Distance; i++) {
             newState = MoveForward(newState);
             var whatIsThere = newState.Map.WhatIsThere(newState.X, newState.Y);
-            var crushHandler = CrushHandlers[whatIsThere.GetType()];
-            newState = crushHandler(newState);
+            newState = CrushHandlers.Aggregate(newState, 
+                (current, crushHandler) => crushHandler(current, whatIsThere)
+            );
         }
         return newState;
     }

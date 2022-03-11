@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using FluentAssertions;
 using TheTurtle;
 using Xunit;
 
@@ -39,8 +40,7 @@ public class Movement {
     [Fact]
     public void AllDirectionTurn() {
         // Arrange
-        var map = new Map();
-        var t = new Turtle(map);
+        var t = new Turtle();
         // Act
         t.MoveForward(15);
         t.Turn(TurnDirections.Left);
@@ -56,8 +56,11 @@ public class Movement {
             Direction = Directions.South,
             X = 20,
             Y = 10,
-            Map = map,
         };
-        Assert.Equal(expectedState,state );
+        state.Should().BeEquivalentTo(expectedState, options => options
+            .Excluding(turtleState => turtleState.Map)
+            .ComparingByMembers(typeof(TurtleState))
+        );
+
     }
 }

@@ -14,7 +14,7 @@ public class CheckWithMap
     
         var turtle = new Turtle(map);
 
-        turtle.MoveForward(10);
+        turtle.MoveForward(10000);
 
         var expectedState = new TurtleState(Directions.North, 0, 4, map);
         
