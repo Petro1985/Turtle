@@ -11,6 +11,12 @@ public struct TurtleState {
         this.Y = y;
     }
 
+    public TurtleState(TurtleState ts) {
+        Direction = ts.Direction;
+        this.X = ts.X;
+        this.Y = ts.Y;
+    }
+
     public override string ToString() {
         return $"x = {X}\ny = {Y}\nDirection: {Enum.GetName(Direction)}";
     }
