@@ -1,4 +1,4 @@
-﻿namespace TheTurtle;
+﻿namespace ConsoleApp3;
 
 public enum SoulState {
     Pedestrian,
@@ -11,14 +11,14 @@ public record struct TurtleState(
     int X,
     int Y,
     SoulState SoulState,
-    Map Map
+    Maps.Map Map
 ) {
-    public TurtleState(Map? map = null) : this(
+    public TurtleState(Maps.Map? map = null) : this(
         Directions.North
         , 0
         , 0
         , SoulState.Pedestrian
-        , map ?? new Map()
+        , map ?? new Maps.Map()
     ) {
     }
 };

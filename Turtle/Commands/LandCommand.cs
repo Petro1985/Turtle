@@ -1,6 +1,4 @@
-﻿using TheTurtle;
-
-namespace ConsoleApp3.Commands; 
+﻿namespace ConsoleApp3.Commands; 
 
 class LandCommand : CommandBase {
     public override TurtleState ApplyCommand(TurtleState ts) {

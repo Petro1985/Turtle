@@ -1,23 +1,45 @@
-﻿using FluentAssertions;
-using Microsoft.VisualBasic;
-using TheTurtle;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using ConsoleApp3.Maps;
+using ConsoleApp3.Repositories;
+using FluentAssertions;
 using Xunit;
 namespace Tests; 
 
-public class Repository {
-    [Fact]
-    public void RepositoryTest() {
-
-        var MapRepository = new InMemoryMapRepository();
-        
+public class Repository : IDisposable {
+    [Theory]
+    [MemberData(nameof(Data))]
+    public void RepositoryTest(IMapRepository mapRepository) {
+       
         var map = new Map {
             Name = "Super map!!!"
         };
 
-        var id = MapRepository.Add(map);
-        var map2 = MapRepository.Get(id);
-
+        map.Add(new Wall(2, 3));
+        map.Add(new Wall(5, -3));
+        
+        var id = mapRepository.Add(map);
+        var map2 = mapRepository.Get(id);
+        
         map.Should().BeEquivalentTo(map2, options => options.Using(Map.StructureComparer));
     }
+    public static IEnumerable<object[]> Data()
+    {
+        return new List<object[]>
+        {
+            new object[] {new InFileMapRepository()},
+            new object[] {new InMemoryMapRepository()},
+        };
+    }
 
+    public void Dispose()
+    {
+        var files = Directory.GetFiles(".", "Map_*");
+        foreach (var file in files)
+        {
+            File.Delete(file);            
+        }
+    }
 }
+

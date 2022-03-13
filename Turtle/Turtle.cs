@@ -1,8 +1,6 @@
-﻿using System.Diagnostics;
-using System.Reflection.Metadata.Ecma335;
-using ConsoleApp3.Commands;
+﻿using ConsoleApp3.Commands;
 
-namespace TheTurtle;
+namespace ConsoleApp3;
 
 public class Turtle {
     private TurtleState _initialState;
@@ -28,9 +26,9 @@ public class Turtle {
     }
 
     public Turtle(TurtleState initialState) {
-        this._initialState = initialState;
+        _initialState = initialState;
     }
-    public Turtle(Map map) : this(new TurtleState(map: map)) {}
+    public Turtle(Maps.Map map) : this(new TurtleState(map: map)) {}
 
-    public Turtle() : this(new TurtleState(map: new Map())) {}
+    public Turtle() : this(new TurtleState(map: new Maps.Map())) {}
 }

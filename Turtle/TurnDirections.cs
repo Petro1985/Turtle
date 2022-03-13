@@ -1,4 +1,4 @@
-﻿namespace TheTurtle;
+﻿namespace ConsoleApp3;
 
 public enum TurnDirections {
     Right = 1,

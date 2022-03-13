@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿
+using ConsoleApp3;
 using FluentAssertions;
-using TheTurtle;
 using Xunit;
-
+using ConsoleApp3.Maps;
 namespace Tests; 
 
 public class Movement {

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TheTurtle;
+using ConsoleApp3;
+using ConsoleApp3.Maps;
 using Xunit;
 
 namespace Tests; 
