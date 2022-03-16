@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using ConsoleApp3;
-using ConsoleApp3.Maps;
+using TurtleApp;
+using TurtleApp.Maps;
 using Xunit;
 
 namespace Tests; 
@@ -19,7 +19,7 @@ public class CheckWithMap
 
         var expectedState = new TurtleState(Directions.North, 0, 4, SoulState.Pedestrian, map);
         
-        Assert.Equal(expectedState, turtle.whatIsMyState());
+        Assert.Equal(expectedState, turtle.WhatIsMyState());
     }
 
     [Fact]
@@ -36,9 +36,8 @@ public class CheckWithMap
 
         var expectedState = new TurtleState(Directions.South, 0, -10, SoulState.Helicopter, map);
         
-        Assert.Equal(expectedState, turtle.whatIsMyState());
+        Assert.Equal(expectedState, turtle.WhatIsMyState());
         
-    }
-    
+    } 
 }
 

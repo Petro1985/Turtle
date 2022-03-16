@@ -1,8 +1,8 @@
 ﻿
-using ConsoleApp3;
+using TurtleApp;
 using FluentAssertions;
 using Xunit;
-using ConsoleApp3.Maps;
+using TurtleApp.Maps;
 namespace Tests; 
 
 public class Movement {
@@ -25,7 +25,7 @@ public class Movement {
         t.MoveForward(20);
         t.Turn(TurnDirections.Right);
         t.MoveForward(20);
-        var state = t.whatIsMyState();
+        var state = t.WhatIsMyState();
         
         // Assert
         var expectedState = new TurtleState {
@@ -48,7 +48,7 @@ public class Movement {
         t.MoveForward(30);
         t.Turn(TurnDirections.Right);
         t.MoveForward(5);
-        var state = t.whatIsMyState();
+        var state = t.WhatIsMyState();
         
         // Assert
         var expectedState = new TurtleState {

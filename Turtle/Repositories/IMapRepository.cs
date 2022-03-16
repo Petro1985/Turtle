@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp3.Repositories;
+﻿namespace TurtleApp.Repositories;
 using Maps;
 
 public interface IMapRepository {

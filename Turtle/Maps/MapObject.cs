@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp3.Maps;
+﻿namespace TurtleApp.Maps;
 
 public abstract class MapObject {
     public int X { get; }

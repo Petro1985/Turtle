@@ -1,7 +1,7 @@
 ﻿using System.Text;
-using ConsoleApp3.Maps;
+using TurtleApp.Maps;
 
-namespace ConsoleApp3.Repositories;
+namespace TurtleApp.Repositories;
 
 public class InFileMapRepository : IMapRepository
 {

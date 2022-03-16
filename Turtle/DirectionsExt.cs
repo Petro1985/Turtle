@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp3;
+﻿namespace TurtleApp;
 
 public static class DirectionsExt {
     public static Directions turn(this Directions turnFrom, TurnDirections t) {

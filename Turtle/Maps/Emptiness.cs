@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp3.Maps;
+﻿namespace TurtleApp.Maps;
 
 public class Emptiness : MapObject {
     public Emptiness(int x, int y) : base(x, y) {

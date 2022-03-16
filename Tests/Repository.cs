@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using ConsoleApp3.Maps;
-using ConsoleApp3.Repositories;
+using TurtleApp.Maps;
+using TurtleApp.Repositories;
 using FluentAssertions;
 using Xunit;
 namespace Tests; 
