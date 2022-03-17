@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Turtle", "Turtle\Turtle.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{1A8ECC21-5005-4ED2-8790-D6CD40C58A71}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Turtle.TelegramBot", "Turtle.TelegramBot\Turtle.TelegramBot.csproj", "{1B244233-3283-41D9-9EA3-F127F888EFFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{1A8ECC21-5005-4ED2-8790-D6CD40C58A71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A8ECC21-5005-4ED2-8790-D6CD40C58A71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A8ECC21-5005-4ED2-8790-D6CD40C58A71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B244233-3283-41D9-9EA3-F127F888EFFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B244233-3283-41D9-9EA3-F127F888EFFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B244233-3283-41D9-9EA3-F127F888EFFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B244233-3283-41D9-9EA3-F127F888EFFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

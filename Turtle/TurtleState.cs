@@ -21,6 +21,11 @@ public record struct TurtleState(
         , map ?? new Maps.Map()
     ) {
     }
+
+    public override string ToString()
+    {
+        return $"X = {X}; Y = {Y}\nDirection = {Direction}\nCurrent \"SoulState\" is {SoulState}";
+    }
 };
 
 
