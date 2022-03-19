@@ -5,12 +5,13 @@ using Telegram.Bot.Exceptions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InputFiles;
+using Turtle.Maps;
 
 namespace Turtle.TelegramBot;
 
 public class TelegramBotHandler
 {
-    private TurtleProvider _turtleProvider;
+    private readonly TurtleProvider _turtleProvider;
 
     public TelegramBotHandler(TurtleProvider turtleProvider)
     {
@@ -26,9 +27,10 @@ public class TelegramBotHandler
             return;
         
         var chatId = update.Message.Chat.Id;
-        var messageText = update.Message.Text.ToLower();
+        var messageText = (update.Message.Text ?? "").ToLower();
 
         var mfPattern = "^mf ?([0-9]{0,3})$";
+        var putWallPattern = "^pw ?(-?[0-9]{1,3})[,| ] ?(-?[0-9]{1,3})$";
         var outMessage = "";
         var processedFlag = false;
 
@@ -45,23 +47,46 @@ public class TelegramBotHandler
         }
         else
         {
-            switch (messageText)
+            match = Regex.Match(messageText, putWallPattern);
+            if (match.Success)
             {
-                case "tl": 
-                    turtle.Turn(TurnDirections.Left);
-                    outMessage = "Turned left";
-                    processedFlag = true;
-                    break; 
-                case "tr": 
-                    turtle.Turn(TurnDirections.Right);
-                    processedFlag = true;
-                    outMessage = "Turned right";
-                    break; 
-                case "tb":
-                    processedFlag = true;
-                    outMessage = "Turned back";
-                    turtle.Turn(TurnDirections.Back);
-                    break;
+                var x = int.Parse(match.Groups[1].Value);
+                var y = int.Parse(match.Groups[2].Value);
+                turtle.WhatIsMyState().Map.Add(new Wall(x, y));
+                outMessage = $"Wall put at x={x} y={y}";
+                processedFlag = true;
+            }
+            else
+            {
+                switch (messageText)
+                {
+                    case "tl":
+                        turtle.Turn(TurnDirections.Left);
+                        outMessage = "Turned left";
+                        processedFlag = true;
+                        break;
+                    case "tr":
+                        turtle.Turn(TurnDirections.Right);
+                        processedFlag = true;
+                        outMessage = "Turned right";
+                        break;
+                    case "tb":
+                        processedFlag = true;
+                        outMessage = "Turned back";
+                        turtle.Turn(TurnDirections.Back);
+                        break;
+                    case "help":
+                        outMessage = "Commands:" +
+                                     "\ntr - turn right" +
+                                     "\ntl - turn right" +
+                                     "\ntb - turn back" +
+                                     "\nmf N- move forward N cells (move 1 if no N as default)" +
+                                     "\npw x y - build a wall at coordinate (x, y)" +
+                                     "\nhelp - this help";
+
+                        processedFlag = true;
+                        break;
+                }
             }
 
         }
@@ -71,42 +96,44 @@ public class TelegramBotHandler
         if (!processedFlag)
         {
             outMessage = "It's not a command!!!";
-            Message sentMessage = await botClient.SendTextMessageAsync(
+            await botClient.SendTextMessageAsync(
                 chatId: chatId,
                 text: outMessage,
                 cancellationToken: cancellationToken);
             return;
         }
 
-        using (MemoryStream inMemoryStream = new MemoryStream())
-        {
-            picture.Save(inMemoryStream, ImageFormat.Jpeg);
-            //File.WriteAllBytes("qwe.jpg",inMemoryStream.ToArray());
-            inMemoryStream.Position = 0;
-            var file = new InputOnlineFile(inMemoryStream);
-            
-            
-            // Send back the message
-            Message sentMessage = await botClient.SendPhotoAsync(
-                chatId: chatId,
-                caption: "Current state",
-                photo: file,
-                cancellationToken: cancellationToken);
-        }
+        await botClient.SendTextMessageAsync(
+            chatId: chatId,
+            text: outMessage,
+            cancellationToken: cancellationToken);
 
+        await using var inMemoryStream = new MemoryStream();
+        picture.Save(inMemoryStream, ImageFormat.Jpeg);
+        //File.WriteAllBytes("qwe.jpg",inMemoryStream.ToArray());
+        inMemoryStream.Position = 0;
+        var file = new InputOnlineFile(inMemoryStream);
+            
+            
+        // Send back the message
+        await botClient.SendPhotoAsync(
+            chatId: chatId,
+            caption: "Current state",
+            photo: file,
+            cancellationToken: cancellationToken);
         
     }
 
     public Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
     {
-        var ErrorMessage = exception switch
+        var errorMessage = exception switch
         {
             ApiRequestException apiRequestException
                 => $"Telegram API Error:\n[{apiRequestException.ErrorCode}]\n{apiRequestException.Message}",
             _ => exception.ToString()
         };
 
-        Console.WriteLine(ErrorMessage);
+        Console.WriteLine(errorMessage);
         return Task.CompletedTask;
     }
     
