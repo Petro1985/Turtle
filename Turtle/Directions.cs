@@ -1,4 +1,4 @@
-﻿namespace TurtleApp;
+﻿namespace Turtle;
 
 public enum Directions {
     North,

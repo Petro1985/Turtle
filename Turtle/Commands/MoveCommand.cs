@@ -1,8 +1,6 @@
-﻿using System.Runtime.CompilerServices;
-using TurtleApp.Maps;
-using TurtleApp.Handlers;
+﻿using Turtle.Handlers;
 
-namespace TurtleApp.Commands;
+namespace Turtle.Commands;
 
 class MoveCommand : CommandBase {
     public MoveCommand(int distance, IEnumerable<CrushHandlerBase> crushHandlers) {

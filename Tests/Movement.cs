@@ -1,8 +1,8 @@
-﻿
-using TurtleApp;
+﻿using Turtle;
+using Turtle.Maps;
 using FluentAssertions;
 using Xunit;
-using TurtleApp.Maps;
+
 namespace Tests; 
 
 public class Movement {

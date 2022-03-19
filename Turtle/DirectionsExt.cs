@@ -1,4 +1,4 @@
-﻿namespace TurtleApp;
+﻿namespace Turtle;
 
 public static class DirectionsExt {
     public static Directions turn(this Directions turnFrom, TurnDirections t) {

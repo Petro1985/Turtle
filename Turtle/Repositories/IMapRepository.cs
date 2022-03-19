@@ -1,5 +1,6 @@
-﻿namespace TurtleApp.Repositories;
-using Maps;
+﻿using Turtle.Maps;
+
+namespace Turtle.Repositories;
 
 public interface IMapRepository {
     Map? Get(int id);

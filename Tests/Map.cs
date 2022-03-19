@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TurtleApp;
-using TurtleApp.Maps;
+using Turtle;
+using Turtle.Maps;
 using Xunit;
 
 namespace Tests; 

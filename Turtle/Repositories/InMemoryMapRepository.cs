@@ -1,4 +1,4 @@
-﻿namespace TurtleApp.Repositories;
+﻿namespace Turtle.Repositories;
 
 public class InMemoryMapRepository : IMapRepository {
     private Dictionary<int, Maps.Map> Storage = new();

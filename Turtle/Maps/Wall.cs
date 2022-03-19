@@ -1,4 +1,4 @@
-﻿namespace TurtleApp.Maps;
+﻿namespace Turtle.Maps;
 
 public class Wall : MapObject {
     public Wall(int x, int y) : base(x, y) {

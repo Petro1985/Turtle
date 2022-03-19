@@ -1,4 +1,4 @@
-﻿namespace TurtleApp.Commands; 
+﻿namespace Turtle.Commands; 
 
 class LandCommand : CommandBase {
     public override TurtleState ApplyCommand(TurtleState ts) {

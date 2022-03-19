@@ -1,11 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using TurtleApp.Commands;
-using TurtleApp.Handlers;
-using TurtleApp.Maps;
-using TurtleApp.Repositories;
-using System.Drawing;
+﻿using Turtle.Commands;
+using Turtle.Handlers;
 
-namespace TurtleApp;
+namespace Turtle;
 
 public class Turtle {
     private TurtleState _initialState;
@@ -39,19 +35,4 @@ public class Turtle {
     public Turtle(Maps.Map map, IEnumerable<CrushHandlerBase> crushHandlers) : this(new TurtleState(map: map), crushHandlers) {}
 
     public Turtle(IEnumerable<CrushHandlerBase> crushHandlers) : this(new TurtleState(map: new Maps.Map()), crushHandlers) {}
-}
-
-
-public static class ServiceCollectionExt
-{
-    public static IServiceCollection AddTurtle(this IServiceCollection services)
-    {
-        services.AddSingleton<CrushHandlerBase, CrushIntoWallHandler>()
-            .AddSingleton<Map>()
-            .AddSingleton<Turtle>()
-            .AddSingleton<IMapRepository, InMemoryMapRepository>();
-        //services.AddSingleton<IMapRepository, InFileMapRepository>();
-
-        return services;
-    }
 }

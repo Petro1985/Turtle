@@ -1,4 +1,4 @@
-﻿namespace TurtleApp.Maps;
+﻿namespace Turtle.Maps;
 
 public abstract class MapObject {
     public int X { get; }

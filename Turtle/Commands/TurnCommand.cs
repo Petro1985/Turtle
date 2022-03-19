@@ -1,4 +1,4 @@
-﻿namespace TurtleApp.Commands;
+﻿namespace Turtle.Commands;
 
 class TurnCommand : CommandBase {
     public TurnCommand(TurnDirections turnDirection) {

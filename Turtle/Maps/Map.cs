@@ -1,4 +1,4 @@
-﻿namespace TurtleApp.Maps;
+﻿namespace Turtle.Maps;
 
 public class Map {
     private sealed class StructureEqualityComparer : IEqualityComparer<Map> {
