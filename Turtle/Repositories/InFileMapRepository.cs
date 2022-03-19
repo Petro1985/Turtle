@@ -5,9 +5,16 @@ namespace Turtle.Repositories;
 
 public class InFileMapRepository : IMapRepository
 {
+    private string path;
+
+    public InFileMapRepository(string path)
+    {
+        this.path = path;
+    }
+
     private string[] GetFileNamesList()
     {
-        return Directory.GetFiles(".", "Map_*");
+        return Directory.GetFiles(path, "Map_*");
     }
     private string MapToString(Map map) {
         var str = new StringBuilder();

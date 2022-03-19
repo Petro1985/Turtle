@@ -3,15 +3,15 @@
 using Turtle;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using File = System.IO.File;
-using Turtle = Turtle.Turtle;
+using Turtle.TelegramBot;
 
 
 var host = Host.CreateDefaultBuilder()
     .ConfigureServices(collection =>
     {
         collection.AddHostedService<TurtleHostService>();
-        collection.AddTurtle();
+        collection.AddTurtle(".\\Resources");
+        collection.AddSingleton<TelegramBotHandler>();
     }).Build();
 
 await host.StartAsync();

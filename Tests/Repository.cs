@@ -33,13 +33,13 @@ public class Repository : IDisposable {
         };
     }
 
-    public void Dispose()
-    {
-        var files = Directory.GetFiles(".", "Map_*");
-        foreach (var file in files)
-        {
-            File.Delete(file);            
-        }
-    }
+    // public void Dispose()
+    // {
+    //     var files = Directory.GetFiles(".", "Map_*");
+    //     foreach (var file in files)
+    //     {
+    //         File.Delete(file);            
+    //     }
+    // }
 }
 
