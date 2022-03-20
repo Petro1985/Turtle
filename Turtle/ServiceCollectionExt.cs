@@ -10,7 +10,7 @@ public static class ServiceCollectionExt
     public static IServiceCollection AddTurtle(this IServiceCollection services, string pathToMap)
     {
         services.AddSingleton<CrushHandlerBase, CrushIntoWallHandler>()
-            .AddSingleton<Map>(provider =>
+            .AddTransient<Map>(provider =>
             {
                 var rep = provider.GetRequiredService<IMapRepository>();
                 return rep.Get(1) ?? new Map();

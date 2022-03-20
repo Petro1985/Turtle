@@ -5,6 +5,7 @@ using Telegram.Bot.Exceptions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InputFiles;
+using Telegram.Bot.Types.ReplyMarkups;
 using Turtle.Maps;
 
 namespace Turtle.TelegramBot;
@@ -53,7 +54,7 @@ public class TelegramBotHandler
                 var x = int.Parse(match.Groups[1].Value);
                 var y = int.Parse(match.Groups[2].Value);
                 turtle.WhatIsMyState().Map.Add(new Wall(x, y));
-                outMessage = $"Wall put at x={x} y={y}";
+                outMessage = $"Wall was put at x={x} y={y}";
                 processedFlag = true;
             }
             else
@@ -78,7 +79,7 @@ public class TelegramBotHandler
                     case "help":
                         outMessage = "Commands:" +
                                      "\ntr - turn right" +
-                                     "\ntl - turn right" +
+                                     "\ntl - turn left" +
                                      "\ntb - turn back" +
                                      "\nmf N- move forward N cells (move 1 if no N as default)" +
                                      "\npw x y - build a wall at coordinate (x, y)" +
@@ -113,14 +114,25 @@ public class TelegramBotHandler
         //File.WriteAllBytes("qwe.jpg",inMemoryStream.ToArray());
         inMemoryStream.Position = 0;
         var file = new InputOnlineFile(inMemoryStream);
-            
-            
+        KeyboardButton[] buttons = new[]
+        {
+            new KeyboardButton("mf"),
+            new KeyboardButton("tr"),
+            new KeyboardButton("tl"),
+            new KeyboardButton("tb"),
+            new KeyboardButton("pw"),
+        };
+        
+        var replyKeyboardMarkup = new ReplyKeyboardMarkup(buttons);
+        
         // Send back the message
         await botClient.SendPhotoAsync(
             chatId: chatId,
             caption: "Current state",
             photo: file,
+            replyMarkup: replyKeyboardMarkup,
             cancellationToken: cancellationToken);
+
         
     }
 
